@@ -1,6 +1,6 @@
 // vercel.json
 {
-  "version": 2,
+  "version": 1,
   "builds": [
     {
       "src": "server.js",
