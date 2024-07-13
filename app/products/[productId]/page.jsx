@@ -22,8 +22,8 @@ function SingleProduct({ params }) {
             reverse_sort: "false",
             page: currentPage,
             size: 10,
-            Appid: "LNMFWUMQW03F5IY",
-            Apikey: "ffc05d0b42e046aa9f44d792cd4fe8cf20240713032447319882",
+            Appid: process.env.NEXT_PUBLIC_APP_ID,
+            Apikey: process.env.NEXT_PUBLIC_API_KEY,
           },
         });
 

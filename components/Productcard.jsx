@@ -46,12 +46,9 @@ function Productcard({ id, name, review, sold, photos, current_price }) {
               <h2 className="text-xs md:text-[18px]">{name}</h2>
               <div className="flex gap-2 items-center">
                 <h2 className="text-xs md:text-[14px] font-medium ">
-                  NGN {current_price?.[0].NGN}.00
+                  {current_price?.[0].NGN}.00
                 </h2>
-                <p className="text-[10px] md:text-sm text-gray-300">
-                  {sold} Sold
-                </p>
-              </div>
+                             </div>
             </div>{" "}
           </div>
         </Link>

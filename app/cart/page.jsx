@@ -61,7 +61,7 @@ function Cart() {
                   query: { cartItems: JSON.stringify(cartItems) },
                 }}
               >
-                Checkout (N{calculateSubtotal(cartItems)})
+                Checkout ({calculateSubtotal(cartItems)})
               </Link>
             </div>
             <div>
