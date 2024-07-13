@@ -1,17 +1,44 @@
-import Button from "@/components/Button";
+"use client";
+import { useContext, useState } from "react";
+import Link from "next/link";
+import { ProductContext } from "@/context/ProductContext";
 import Carts from "@/components/Carts";
 import Productcard from "@/components/Productcard";
 import { products } from "@/data";
-import Link from "next/link";
 
 function Cart() {
+  const { cartItems, setCartItems } = useContext(ProductContext);
+
+  // Function to update the quantity of a specific item in the cart
+  const updateQuantity = (id, newQuantity) => {
+    const updatedCartItems = cartItems.map((item) =>
+      item.id === id ? { ...item, quantity: newQuantity } : item,
+    );
+    setCartItems(updatedCartItems);
+  };
+
+  // Function to calculate subtotal
+  const calculateSubtotal = (cartItems) => {
+    let subtotal = 0;
+    cartItems.forEach((item) => {
+      const price = item.current_price?.[0]?.NGN?.[0];
+      if (price) {
+        subtotal += price * (item.quantity || 1);
+      }
+    });
+    return subtotal.toLocaleString("en-NG", {
+      style: "currency",
+      currency: "NGN",
+    }); // Format subtotal as currency
+  };
+
   return (
     <>
       <div>
         <div className="md:flex gap-6 py-10 w-full">
           <div className="md:w-8/12 flex flex-col gap-8">
-            {products.slice(0, 3).map((prod) => (
-              <Carts key={prod.id} {...prod} />
+            {cartItems.map((prod) => (
+              <Carts key={prod.id} {...prod} updateQuantity={updateQuantity} />
             ))}
           </div>
 
@@ -23,19 +50,20 @@ function Cart() {
                   <p className="text-md">Subtotal</p>
                   <p className="text-xs">Delivery fees not included yet</p>
                 </div>
-                <h2 className="text-lg font-medium">N751,133</h2>
+                <h2 className="text-lg font-medium">
+                  N{calculateSubtotal(cartItems)}
+                </h2>
               </div>
               <Link
                 className="p-4 text-center text-white rounded-xl bg-primarycolor"
                 href={"/checkout"}
               >
-                {" "}
-                Checkout (N751,133){" "}
+                Checkout (N{calculateSubtotal(cartItems)})
               </Link>
             </div>
             <div>
-              <p>Returns are east</p>
-              <p>Free return withing 7 days for ALL eligible items </p>
+              <p>Returns are easy</p>
+              <p>Free return within 7 days for ALL eligible items</p>
             </div>
           </div>
         </div>

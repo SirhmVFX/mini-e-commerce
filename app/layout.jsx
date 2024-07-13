@@ -2,6 +2,7 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { ProductContextProvider } from "@/context/ProductContext";
 
 const inter = Montserrat({ subsets: ["latin"] });
 
@@ -14,9 +15,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <div className="md:w-5/6 px-4 md:px-0 mx-auto">{children}</div>
-        <Footer />
+        <ProductContextProvider>
+          <Header />
+          <div className="md:w-5/6 px-4 md:px-0 mx-auto">{children}</div>
+          <Footer />
+        </ProductContextProvider>
       </body>
     </html>
   );
