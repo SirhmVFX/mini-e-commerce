@@ -4,16 +4,9 @@ import { ProductContext } from "@/context/ProductContext";
 import Image from "next/image";
 import { CiHeart, CiShoppingCart } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
+import Link from "next/link";
 
-function Productcard({
-  id,
-  name,
-  amount,
-  review,
-  sold,
-  photos,
-  current_price,
-}) {
+function Productcard({ id, name, review, sold, photos, current_price }) {
   const { cartItems, setCartItems } = useContext(ProductContext);
 
   const addToCart = () => {
@@ -22,7 +15,7 @@ function Productcard({
   };
 
   return (
-    <div className=" ">
+    <Link href={`/products/${id}`} className=" ">
       <div className="bg-gray-100 md:h-[200px] h-[150px] relative rounded-ss-xl rounded-se-xl">
         <div className="bg-white rounded-full flex justify-center items-center absolute right-2 top-2 md:w-[35px] md:-[35px] w-[25px] h-[25px]">
           <CiHeart className="text-base md:text-xl " />
@@ -63,7 +56,7 @@ function Productcard({
           <CiShoppingCart className="text-base md:text-xl text-white" />
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

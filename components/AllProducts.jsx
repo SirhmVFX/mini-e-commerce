@@ -45,7 +45,7 @@ function AllProducts() {
     return (
       <>
         <div>
-          <p className="text-red-500 font-bold">Error Fetching Posts</p>
+          <p className="text-red-500 font-bold">Error Fetching Product</p>
         </div>
       </>
     );
