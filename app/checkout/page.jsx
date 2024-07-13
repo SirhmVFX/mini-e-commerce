@@ -1,8 +1,22 @@
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import Checkoutcard from "@/components/Checkoutcard";
 import { products } from "@/data";
 
 function Checkout() {
+  const router = useRouter();
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    if (router.isReady) {
+      const { cartItems } = router.query;
+      if (cartItems) {
+        setCartItems(JSON.parse(cartItems));
+      }
+    }
+  }, [router.isReady, router.query]);
   return (
     <div>
       <h2 className="text-3xl mb-8">Checkout</h2>
@@ -70,11 +84,11 @@ function Checkout() {
 
         <div className="md:w-5/12 py-6">
           <div className="py-1 border-b border-gray-100 mb-4">
-            <h2>Shipping details</h2>
+            <h2>Order Summary</h2>
           </div>
           <div className="flex flex-col gap-4">
-            {products.slice(0, 3).map((p) => (
-              <Checkoutcard key={p.id} {...p} />
+            {cartItems.map((item) => (
+              <Checkoutcard key={item.id} {...item} />
             ))}
           </div>
         </div>

@@ -56,7 +56,10 @@ function Cart() {
               </div>
               <Link
                 className="p-4 text-center text-white rounded-xl bg-primarycolor"
-                href={"/checkout"}
+                href={{
+                  pathname: "/checkout",
+                  query: { cartItems: JSON.stringify(cartItems) },
+                }}
               >
                 Checkout (N{calculateSubtotal(cartItems)})
               </Link>

@@ -1,21 +1,14 @@
 "use client";
 
-import { ProductContext } from "@/context/ProductContext";
 import axios from "axios";
 import Image from "next/image";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function SingleProduct({ params }) {
   const { productId } = params;
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { cartItems, setCartItems } = useContext(ProductContext);
-
-  const addToCart = () => {
-    const product = { id, name, current_price, review, sold, photos };
-    setCartItems((prevItems) => [...prevItems, product]);
-  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -81,10 +74,7 @@ function SingleProduct({ params }) {
           <h1 className="text-3xl font-bold">{product?.name}</h1>
           <p className="text-lg">NGN {product?.current_price}.00</p>
           <p>{product.description}</p>
-          <button
-            onClick={addToCart}
-            className="px-4 py-2 bg-primarycolor text-white rounded-lg"
-          >
+          <button className="px-4 py-2 bg-primarycolor text-white rounded-lg">
             Add to Cart
           </button>
         </div>
