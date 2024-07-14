@@ -52,7 +52,7 @@ function Checkout() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label htmlFor="">Card Number</label>
+                <label htmlFor="">Card Numbers</label>
                 <input
                   type="text"
                   placeholder="eg 1234 5678 9012"
