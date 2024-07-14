@@ -7,17 +7,14 @@ import { ProductContext } from "@/context/ProductContext";
 
 function Carts({ id, name, current_price, photos, updateQuantity }) {
   const { removeItem } = useContext(ProductContext);
-  // Access removeItem from context
   const [quantity, setQuantity] = useState(1); // State to track quantity
 
-  // Function to increase the quantity
   const increaseQuantity = () => {
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
     updateQuantity(id, newQuantity);
   };
 
-  // Function to decrease the quantity
   const decreaseQuantity = () => {
     if (quantity > 1) {
       const newQuantity = quantity - 1;
@@ -26,7 +23,6 @@ function Carts({ id, name, current_price, photos, updateQuantity }) {
     }
   };
 
-  // Calculate the total amount
   const price = current_price?.[0]?.NGN?.[0] || 0;
   const totalAmount = price * quantity;
 
