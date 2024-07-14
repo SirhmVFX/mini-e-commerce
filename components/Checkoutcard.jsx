@@ -1,7 +1,6 @@
 const { default: Image } = require("next/image");
-const { CiTrash } = require("react-icons/ci");
 
-function Checkoutcard({ img, name, amount, photos, current_price, quantity }) {
+function Checkoutcard({ name, photos, current_price, quantity }) {
   return (
     <>
       <div className="flex gap-4 w-full  ">
@@ -27,7 +26,7 @@ function Checkoutcard({ img, name, amount, photos, current_price, quantity }) {
               </p>
             </div>
             <h2 className="text-lg font-medium">
-              NGN {current_price?.[0].NGN}.00
+              NGN {current_price?.[0]?.NGN}.00
             </h2>
             <p className="text-sm text-primarycolor">
               Quantity: {quantity} pairs

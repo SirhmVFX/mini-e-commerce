@@ -5,7 +5,6 @@ import { ProductContext } from "@/context/ProductContext";
 function Payment() {
   const { cartItems } = useContext(ProductContext);
 
-  // Function to calculate total amount
   const calculateTotal = (cartItems) => {
     let total = 0;
     cartItems.forEach((item) => {
@@ -17,7 +16,7 @@ function Payment() {
     return total.toLocaleString("en-NG", {
       style: "currency",
       currency: "NGN",
-    }); // Format total as currency
+    });
   };
 
   return (

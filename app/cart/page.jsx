@@ -1,15 +1,12 @@
 "use client";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import { ProductContext } from "@/context/ProductContext";
 import Carts from "@/components/Carts";
-import Productcard from "@/components/Productcard";
-import { products } from "@/data";
 
 function Cart() {
-  const { cartItems, setCartItems } = useContext(ProductContext);
+  const { cartItems, setCartItems, removeItem } = useContext(ProductContext);
 
-  // Function to update the quantity of a specific item in the cart
   const updateQuantity = (id, newQuantity) => {
     const updatedCartItems = cartItems.map((item) =>
       item.id === id ? { ...item, quantity: newQuantity } : item,
@@ -17,7 +14,6 @@ function Cart() {
     setCartItems(updatedCartItems);
   };
 
-  // Function to calculate subtotal
   const calculateSubtotal = (cartItems) => {
     let subtotal = 0;
     cartItems.forEach((item) => {
@@ -29,7 +25,7 @@ function Cart() {
     return subtotal.toLocaleString("en-NG", {
       style: "currency",
       currency: "NGN",
-    }); // Format subtotal as currency
+    });
   };
 
   return (
@@ -38,7 +34,12 @@ function Cart() {
         <div className="md:flex gap-6 py-10 w-full">
           <div className="md:w-8/12 flex flex-col gap-8">
             {cartItems.map((prod) => (
-              <Carts key={prod.id} {...prod} updateQuantity={updateQuantity} />
+              <Carts
+                key={prod.id}
+                {...prod}
+                updateQuantity={updateQuantity}
+                removeItem={removeItem}
+              />
             ))}
           </div>
 
@@ -68,14 +69,6 @@ function Cart() {
               <p>Returns are easy</p>
               <p>Free return within 7 days for ALL eligible items</p>
             </div>
-          </div>
-        </div>
-        <div className="hidden md:block">
-          <h2 className="text-3xl">Related products</h2>
-          <div className="grid md:grid-cols-4 gap-4">
-            {products.slice(0, 4).map((prod) => (
-              <Productcard key={prod.id} {...prod} />
-            ))}
           </div>
         </div>
       </div>

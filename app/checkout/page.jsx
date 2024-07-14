@@ -1,14 +1,12 @@
 "use client";
 import { useContext } from "react";
 import { ProductContext } from "@/context/ProductContext";
-import Button from "@/components/Button";
 import Checkoutcard from "@/components/Checkoutcard";
 import Link from "next/link";
 
 function Checkout() {
   const { cartItems } = useContext(ProductContext);
 
-  // Function to calculate subtotal
   const calculateSubtotal = (cartItems) => {
     let subtotal = 0;
     cartItems.forEach((item) => {
@@ -20,7 +18,7 @@ function Checkout() {
     return subtotal.toLocaleString("en-NG", {
       style: "currency",
       currency: "NGN",
-    }); // Format subtotal as currency
+    });
   };
 
   return (

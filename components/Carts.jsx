@@ -1,17 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Image from "next/image";
 import { CiTrash } from "react-icons/ci";
+import { ProductContext } from "@/context/ProductContext";
 
-function Carts({
-  id,
-  name,
-  current_price,
-  photos,
-  removeItem,
-  updateQuantity,
-}) {
+function Carts({ id, name, current_price, photos, updateQuantity }) {
+  const { removeItem } = useContext(ProductContext);
+  // Access removeItem from context
   const [quantity, setQuantity] = useState(1); // State to track quantity
 
   // Function to increase the quantity

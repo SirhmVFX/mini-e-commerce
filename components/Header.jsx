@@ -2,7 +2,6 @@
 import { ProductContext } from "@/context/ProductContext";
 import Link from "next/link";
 import { useContext } from "react";
-import { BsMenuApp } from "react-icons/bs";
 import { CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 import { FaHamburger } from "react-icons/fa";
 
@@ -16,7 +15,7 @@ function Header() {
         </Link>
         <ul className="md:flex hidden gap-8 ">
           <li>
-            <a href="#">Home</a>
+            <a href="/">Home</a>
           </li>
           <li>
             <a href="#">Shop</a>
