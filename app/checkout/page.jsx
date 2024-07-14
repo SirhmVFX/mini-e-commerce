@@ -1,22 +1,27 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { ProductContext } from "@/context/ProductContext";
 import Button from "@/components/Button";
 import Checkoutcard from "@/components/Checkoutcard";
-import { products } from "@/data";
 
 function Checkout() {
-  const router = useRouter();
-  const [cartItems, setCartItems] = useState([]);
+  const { cartItems } = useContext(ProductContext);
 
-  useEffect(() => {
-    if (router.isReady) {
-      const { cartItems } = router.query;
-      if (cartItems) {
-        setCartItems(JSON.parse(cartItems));
+  // Function to calculate subtotal
+  const calculateSubtotal = (cartItems) => {
+    let subtotal = 0;
+    cartItems.forEach((item) => {
+      const price = item.current_price?.[0]?.NGN?.[0];
+      if (price) {
+        subtotal += price * (item.quantity || 1);
       }
-    }
-  }, [router.isReady, router.query]);
+    });
+    return subtotal.toLocaleString("en-NG", {
+      style: "currency",
+      currency: "NGN",
+    }); // Format subtotal as currency
+  };
+
   return (
     <div>
       <h2 className="text-3xl mb-8">Checkout</h2>
@@ -77,7 +82,7 @@ function Checkout() {
                   />
                 </div>
               </div>
-              <Button title={"Checkout (N751,133)"} />
+              <Button title={`Checkout (${calculateSubtotal(cartItems)})`} />
             </form>
           </div>
         </div>
