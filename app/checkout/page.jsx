@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { ProductContext } from "@/context/ProductContext";
 import Button from "@/components/Button";
 import Checkoutcard from "@/components/Checkoutcard";
+import Link from "next/link";
 
 function Checkout() {
   const { cartItems } = useContext(ProductContext);
@@ -82,7 +83,13 @@ function Checkout() {
                   />
                 </div>
               </div>
-              <Button title={`Checkout (${calculateSubtotal(cartItems)})`} />
+              <Link
+                className="md:p-6 p-4 text-center text-white rounded-xl bg-primarycolor"
+                href={"/payment"}
+              >
+                {" "}
+                {`Checkout (${calculateSubtotal(cartItems)})`}{" "}
+              </Link>
             </form>
           </div>
         </div>
