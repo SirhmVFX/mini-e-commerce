@@ -15,19 +15,16 @@ function RelatedProducts() {
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(
-          `https://timbu-get-all-products.reavdev.workers.dev/`,
-          {
-            params: {
-              organization_id: "22a1161314a84e37ab1c2fbf75025905",
-              reverse_sort: "false",
-              page: currentPage,
-              size: 4,
-              Appid: process.env.NEXT_PUBLIC_APP_ID,
-              Apikey: process.env.NEXT_PUBLIC_API_KEY,
-            },
+        const response = await axios.get(`https://api.timbu.cloud/products?`, {
+          params: {
+            organization_id: "22a1161314a84e37ab1c2fbf75025905",
+            reverse_sort: "false",
+            page: currentPage,
+            size: 4,
+            Appid: process.env.NEXT_PUBLIC_APP_ID,
+            Apikey: process.env.NEXT_PUBLIC_API_KEY,
           },
-        );
+        });
 
         if (response?.data && response?.data?.items) {
           setAllProduct(response?.data?.items);

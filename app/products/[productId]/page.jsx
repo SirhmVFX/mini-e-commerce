@@ -19,7 +19,7 @@ function SingleProduct({ params }) {
         setIsLoading(true);
         const currentPage = 1;
         const response = await axios.get(
-          `https://timbu-get-single-product.reavdev.workers.dev/${productId}?`,
+          `https://api.timbu.cloud/products/${productId}?`,
           {
             params: {
               organization_id: "22a1161314a84e37ab1c2fbf75025905",
